@@ -1,6 +1,6 @@
 const { NotImplementedError } = require('../extensions/index.js');
 
-// const { ListNode } = require('../extensions/list-node.js');
+const { ListNode } = require('../extensions/list-node.js');
 
 /**
  * Given a singly linked list of integers l and an integer k,
@@ -23,6 +23,18 @@ const { NotImplementedError } = require('../extensions/index.js');
  * }
  */
 
+function convertArrayToList(arr) {
+  return arr.reverse().reduce((acc, cur) => {
+    if (acc) {
+      const node = new ListNode(cur);
+      node.next = acc;
+      return node;
+    }
+
+    return new ListNode(cur);
+  }, null);
+}
+
 function removeKFromList(arr, key) {
   const result = [];
   let linked = arr;
@@ -34,13 +46,8 @@ function removeKFromList(arr, key) {
     }
   }
 
-  return convertArrayToList(result);
+  return convertArrayToList(result)
 }
-
-// ListNode {
-//   value: 3,
-//   next: ListNode { value: 1, next: ListNode { value: 2, next: [ListNode] } }
-// }
 
 module.exports = {
   removeKFromList
